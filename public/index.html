@@ -6,48 +6,23 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<title>card-calc</title>
 	<meta name="description" content="Calculate the cost per gigabyte of a storage device." />
+	<script type="module" defer src="deferred.js"></script>
 	<style>
 		label {
 			display: block;
+		}
+		output {
+			border: 1px inset;
+			display: inline-block;
+			width: 10em;
+			height: 1em;
 		}
 	</style>
 </head>
 
 <body>
-
 	<h1>calculate the cost per gigabyte of a storage device</h1>
-
-	<label>Capacity: <input id="capacity" type="number" /> GB</label>
-	<label>Price: <input id="price" type="number" /> Dollars</label>
-	<label>Dollars per GB: <output id="perCapacity"></output></label>
-	<script>
-		document.addEventListener('input',(event) => {
-			const { id, value } = event.target;
-			document.dispatchEvent(new CustomEvent(`${id}-change`,{ detail: value }));
-			console.debug(`${id} updated`,{value});
-		});
-
-		let capacity = 0;
-		let price = 0;
-
-		function computeOutput() {
-			const output = document.querySelector('output');
-			if(capacity && price) {
-				output.textContent = price / capacity;
-				console.debug('output computed',{ capacity, price });
-			}
-		}
-
-		document.addEventListener('capacity-change',(event) => {
-			capacity = event.detail;
-			computeOutput();
-		});
-
-		document.addEventListener('price-change',(event) => {
-			price = event.detail;
-			computeOutput();
-		});
-	</script>
+	<main></main>
 </body>
 
 </html>

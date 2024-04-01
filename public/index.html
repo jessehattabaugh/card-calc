@@ -1,25 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>{{NAME}}</title>
-        <link rel="manifest" href="/manifest.json">
-        <link rel="stylesheet" href="/styles/all.css">
-        <link rel="stylesheet" media="screen and (prefers-color-scheme: light)" href="/styles/light.css">
-        <link rel="stylesheet" media="screen and (min-width: 30em)" href="/styles/wide.css">
-        <script type="module" async src="/scripts/async.js"></script>
-        <script type="module" defer src="/scripts/defer.js"></script>
-    </head>
-    <body>
-        <header>
-            <h1>{{NAME}}</h1>
-        </header>
-        <main>
-            <h2>{{DESCRIPTION}}</h2>
-        </main>
-        <footer>
-            <small>&copy; 2024</small>
-        </footer>
-    </body>
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>card-calc</title>
+	<meta name="description" content="Calculate the cost per gigabyte of a storage device." />
+	<style>
+		label {
+			display: block;
+		}
+	</style>
+</head>
+
+<body>
+
+	<h1>calculate the cost per gigabyte of a storage device</h1>
+
+	<label>Capacity: <input id="capacity" type="number" /> GB</label>
+	<label>Price: <input id="price" type="number" /> Dollars</label>
+	<label>Dollars per GB: <output id="perCapacity"></output></label>
+	<script>
+		document.addEventListener('input',(event) => {
+			const {id,value}=event.target;
+			document.dispatchEvent(new CustomEvent(`${id}-change`,{detail: value}));
+			console.debug(`${id} updated`,{value});
+		});
+
+		let capacity=0;
+		let price=0;
+
+		function computeOutput() {
+			const output=document.querySelector('output');
+			if(capacity && price) {
+				output.textContent=capacity/price;
+				console.debug('output computed',{capacity,price});
+			}
+		}
+
+		document.addEventListener('capacity-change',(event) => {
+			capacity=event.detail;
+			computeOutput();
+		});
+
+		document.addEventListener('price-change',(event) => {
+			price=event.detail;
+			computeOutput();
+		});
+	</script>
+</body>
+
 </html>

@@ -22,29 +22,29 @@
 	<label>Dollars per GB: <output id="perCapacity"></output></label>
 	<script>
 		document.addEventListener('input',(event) => {
-			const {id,value}=event.target;
-			document.dispatchEvent(new CustomEvent(`${id}-change`,{detail: value}));
+			const { id, value } = event.target;
+			document.dispatchEvent(new CustomEvent(`${id}-change`,{ detail: value }));
 			console.debug(`${id} updated`,{value});
 		});
 
-		let capacity=0;
-		let price=0;
+		let capacity = 0;
+		let price = 0;
 
 		function computeOutput() {
-			const output=document.querySelector('output');
+			const output = document.querySelector('output');
 			if(capacity && price) {
-				output.textContent=capacity/price;
-				console.debug('output computed',{capacity,price});
+				output.textContent = price / capacity;
+				console.debug('output computed',{ capacity, price });
 			}
 		}
 
 		document.addEventListener('capacity-change',(event) => {
-			capacity=event.detail;
+			capacity = event.detail;
 			computeOutput();
 		});
 
 		document.addEventListener('price-change',(event) => {
-			price=event.detail;
+			price = event.detail;
 			computeOutput();
 		});
 	</script>

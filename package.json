@@ -1,17 +1,16 @@
 {
-	"description": "{{DESCRIPTION}}",
 	"devDependencies": {
 		"eslint": "latest",
 		"eslint-config-prettier": "latest"
 	},
-	"homepage": "{{URL}}",
 	"license": "UNLICENSED",
-	"name": "{{NAME}}",
+	"name": "card-calc",
 	"private": true,
 	"scripts": {
 		"kill": "npx kill-port 3000",
 		"start": "npx serve ./public",
-		"test": "npx cowsay no tests... yet!"
+		"test": "npx cowsay no tests... yet!",
+		"deploy": "npx surge ./public --domain card-calc.surge.sh"
 	},
 	"type": "module"
 }
